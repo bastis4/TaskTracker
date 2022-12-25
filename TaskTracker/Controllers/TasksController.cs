@@ -24,6 +24,11 @@ namespace TaskTracker.Controllers
             _projectRepository = projectRepository;
         }
 
+        /// <summary>
+        /// Create a task
+        /// </summary>
+        /// <param name="request">Request to create a task without ID</param>
+        /// <returns>Response containig task created with ID</returns>
         [HttpPost]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskRequest request)
         {
@@ -41,6 +46,11 @@ namespace TaskTracker.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Get a task by ID
+        /// </summary>
+        /// <param name="request">Request with task ID</param>
+        /// <returns>Response containing found task</returns>
         [HttpGet]
         public async Task<IActionResult> GetTask([FromQuery] GetTaskRequest request)
         {
@@ -58,6 +68,11 @@ namespace TaskTracker.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Update a task by ID
+        /// </summary>
+        /// <param name="request">Request with ID of a task and properties needed to be change</param>
+        /// <returns>Response with updated task</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromBody] UpdateTaskRequest request)
         {
@@ -75,6 +90,11 @@ namespace TaskTracker.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Delete a task by ID
+        /// </summary>
+        /// <param name="id">ID of a task to be deleted</param>
+        /// <returns>Web response</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

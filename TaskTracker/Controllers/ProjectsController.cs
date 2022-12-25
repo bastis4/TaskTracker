@@ -1,0 +1,99 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using TaskTracker.DAL.Interfaces;
+using TaskTracker.Models.Project.Requests;
+using TaskTracker.Models.Project.Responses;
+using TaskTracker.Interfaces;
+using TaskTracker.Models.Project.Validators;
+
+namespace TaskTracker.Controllers
+{
+    public class ProjectsController : BaseApiController
+    {
+        private IProjectService _projectService;
+        private readonly IProjectRepository _projectRepository;
+
+        public ProjectsController(IProjectService projectService, IProjectRepository projectRepository)
+        {
+            _projectService = projectService;
+            _projectRepository = projectRepository;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProject([FromBody] CreateProjectRequest request)
+        {
+            var validator = new CreateProjectRequestValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (!validationResult.IsValid)
+            {
+                validationResult.AddToModelState(ModelState);
+                return BadRequest(validationResult);
+            }
+            
+            var response = await _projectService.CreateProject(request);
+            
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProject([FromQuery] GetProjectRequest request)
+        {
+            var validator = new GetProjectRequestValidator(_projectRepository);
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (!validationResult.IsValid)
+            {
+                validationResult.AddToModelState(ModelState);
+                return BadRequest(validationResult);
+            }
+            
+            var response = await _projectService.GetProject(request);
+
+            return Ok(response);
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetProjects([FromQuery] GetProjectsRequest request)
+        {
+            var response = await _projectService.GetProjects(request);
+
+            return Ok(response);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromBody] UpdateProjectRequest request)
+        {
+            var validator = new UpdateProjectRequestValidator(_projectRepository);
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (!validationResult.IsValid)
+            {
+                validationResult.AddToModelState(ModelState);
+                return BadRequest(validationResult);
+            }
+
+            var response = await _projectService.UpdateProject(request);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var validator = new DeleteProjectRequestValidator(_projectRepository);
+            var validationResult = await validator.ValidateAsync(id);
+
+            if (!validationResult.IsValid)
+            {
+                validationResult.AddToModelState(ModelState);
+                return BadRequest(validationResult);
+            }
+
+            await _projectService.DeleteProject(id);
+
+            return Ok();
+        }
+    }
+}

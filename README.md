@@ -24,6 +24,7 @@ Ability to filter and sort projects with methods (start at, end at, range, exact
 TaskTracker has a three-level project architecture.
 Data access level is stored in a class library TaskTracker.DAL.
 It also provides with Unit Testing in TaskTracker.Tests.
+Controllers are coupled with XML comments.
 
 
 ## Technology stack

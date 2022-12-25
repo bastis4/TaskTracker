@@ -31,6 +31,9 @@ Technology stack used:
 - .NET Core Web API
 - Entity Framework Core
 - MS SQL Server
+- FluentValidation
+- AutoMapper
+- NUnit
 
 ## Patterns and Principles
 Patterns and Principles implemented:
@@ -40,5 +43,25 @@ Patterns and Principles implemented:
 - OOP principles
 
 # Documentation
-##Start
+
+## Controllers and methods
+
+| Controllers | Methods | Description |
+| -------------------- | ---------  |---------  |
+| ProjectsController   | CreateProject  | Create a project |
+|                      | GetProject  | Get a project by ID with tasks |
+|                      | GetProjects  | Get filtered and sorted projects by fields |
+|                      | Update  | Update a project by ID |
+|                      | Delete  | Delete a project by ID |
+| TasksController      | CreateTask  | Create a task |
+|                      | GetTask  | Get a task by ID |
+|                      | Update  | Update a task by ID |
+|                      | Delete  | Delete a task by ID |
+
+
+
+
+## Start
+
 To start using TaskTracker you need to clone this repository and run it with Microsoft Visual Studio.
+You need to have SQL Server Management Studio (SSMS) installed on your computer.

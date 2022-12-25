@@ -4,12 +4,12 @@
 ## Table of Contents
 
 - Technical Overview
-- #Description
-- #Technology stack
-- #Patterns and Principles
+ - (#Description)
+ - #Technology stack
+ - #Patterns and Principles
 - Documentation
-  - [Ghost Doc](#ghost-doc)
-  - [Start](#Start)
+  - Controllers and methods
+  - Start
 
 # Technical Overview
 ## Description

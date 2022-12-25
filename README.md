@@ -4,9 +4,9 @@
 ## Table of Contents
 
 - Technical Overview
- - (#Description)
- - #Technology stack
- - #Patterns and Principles
+  - Description
+  - Technology stack
+  - Patterns and Principles
 - Documentation
   - Controllers and methods
   - Start
